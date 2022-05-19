@@ -54,7 +54,6 @@ extern int errno;
 
 int main(int argc,char** argv)
 {
-	int i;
 	int no_print = 1;
 	struct timeval start, end;
 	unsigned int times=0;
@@ -71,13 +70,13 @@ int main(int argc,char** argv)
 
 	localaddr.sin_family = AF_INET;
 	localaddr.sin_port = htons(atoi(argv[1]));
-	//localaddr.sin_addr.s_addr = inet_addr("172.17.0.1");
-	localaddr.sin_addr.s_addr = inet_addr("192.168.1.100");
+	localaddr.sin_addr.s_addr = inet_addr("172.17.0.1");
+	// localaddr.sin_addr.s_addr = inet_addr("192.168.1.100");
 	
 	serveraddr.sin_family = AF_INET;
 	serveraddr.sin_port = htons(8081);
-	//serveraddr.sin_addr.s_addr = inet_addr("172.17.0.2");
-	serveraddr.sin_addr.s_addr = inet_addr("192.168.1.101");
+	serveraddr.sin_addr.s_addr = inet_addr("172.17.0.2");
+	// serveraddr.sin_addr.s_addr = inet_addr("192.168.1.101");
 	
 
 	sockfd = socket(AF_INET,SOCK_DGRAM,153);
@@ -139,8 +138,8 @@ int main(int argc,char** argv)
 		{
 			no_print = 0;
 			gettimeofday( &end, NULL );
-			printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
-   			printf("end   : %d.%d\n", end.tv_sec, end.tv_usec);
+			printf("start : %ld.%ld\n", start.tv_sec, start.tv_usec);
+   			printf("end   : %ld.%ld\n", end.tv_sec, end.tv_usec);
 			break;
 		}
 		//printf("------------\n");
