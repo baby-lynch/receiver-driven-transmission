@@ -1,6 +1,13 @@
-raw_socket: 
-	gcc raw_socket.c  -o raw_socket
+CC?=gcc 
+CFLAGS=-Wall -g -fsanitize=address
 
+SRC=raw_socket.c
+OUT=server
+
+all:$(SRC)
+	$(CC) -o $(OUT) $^  $(CFLAGS)
+
+.PHONY:clean
 clean:
-	rm  raw_socket
+	rm  -rf server
 
