@@ -37,7 +37,8 @@ typedef struct seanet_hdr_t {
     // seadp
     u16 src_port;
     u16 dst_port;
-    u8 dat : 1,  // packet_mark
+    // packet_mark
+    u8 dat : 1,
         req : 1,
         ret : 1,
         ack : 1,
@@ -175,73 +176,68 @@ int main(int argc, char **argv) {
     // ptr->fin      = 1;
     // ptr->ret      = 1;
     memcpy((char *)ptr + sizeof(seanet_hdr), (const void *)MSG, sizeof(MSG));
-
     /*
-            for(i=0;i<times;i++)
-            {
-
-                    //if((num=sendto(sockfd, (const void*)ptr, size, 0, (struct sockaddr*)&target, sizeof(target))) < 0)
-                    //{
+        for (i = 0; i < times; i++) {
+            // if((num=sendto(sockfd, (const void*)ptr, size, 0, (struct sockaddr*)&target, sizeof(target))) < 0)
+            //{
             //		printf("sendto error!!\n");
-                    //	free((void *)ptr);
+            //	free((void *)ptr);
             //		return -1;
             //	}
             //	printf("send %d bytes\n", (int)num-sizeof(seanet_hdr));
 
-                    send_ofo(100, 3, ptr, (struct sockaddr*) &target, sockfd);
-                    send_ofo(100, 9, ptr, (struct sockaddr*) &target, sockfd);
-                    send_ofo(6, 6, ptr, (struct sockaddr*) &target, sockfd);
-                    send_ofo(11, 4, ptr, (struct sockaddr*) &target, sockfd);
-                    send_ofo(7, 2, ptr, (struct sockaddr*) &target, sockfd);
-                    send_ofo(95, 10, ptr, (struct sockaddr*) &target, sockfd);
-                    send_ofo(97, 8, ptr, (struct sockaddr*) &target, sockfd);
-                    send_ofo(90, 20, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(80, 7, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(75, 10, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(9, 9, ptr, (struct sockaddr*) &target, sockfd);
-            send_ofo(60, 6, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(65, 9, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(60, 20, ptr, (struct sockaddr*) &target, sockfd);
-    //send_ofo(70, 15, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(77, 18, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(70, 15, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(6, 6, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(57, 3, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(58, 6, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(55, 17, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(50, 11, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(15, 12, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(80, 19, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(47, 8, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(43, 4, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(85, 7, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(40, 1, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(39, 5, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(42, 12, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(31, 9, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(25, 2, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(24, 3, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(26, 6, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(60, 13, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(20, 8, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(19, 7, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(70, 20, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(12, 5, ptr, (struct sockaddr*) &target, sockfd);
-    send_ofo(10, 10, ptr, (struct sockaddr*) &target, sockfd);
-            }
+            send_ofo(100, 3, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(100, 9, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(6, 6, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(11, 4, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(7, 2, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(95, 10, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(97, 8, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(90, 20, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(80, 7, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(75, 10, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(9, 9, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(60, 6, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(65, 9, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(60, 20, ptr, (struct sockaddr *)&target, sockfd);
+            // send_ofo(70, 15, ptr, (struct sockaddr*) &target, sockfd);
+            send_ofo(77, 18, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(70, 15, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(6, 6, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(57, 3, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(58, 6, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(55, 17, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(50, 11, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(15, 12, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(80, 19, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(47, 8, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(43, 4, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(85, 7, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(40, 1, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(39, 5, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(42, 12, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(31, 9, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(25, 2, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(24, 3, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(26, 6, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(60, 13, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(20, 8, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(19, 7, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(70, 20, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(12, 5, ptr, (struct sockaddr *)&target, sockfd);
+            send_ofo(10, 10, ptr, (struct sockaddr *)&target, sockfd);
+        }
     */
-
     if (1 && test_if(1)) {
         printf("2\n");
     }
     printf("aac: %02x\n", (int)cca);
     //下面是一个请求-应答数据的服务端
 
-    ///*
     //请求服务器
     while (1) {
         num = recvfrom(sockfd, rcv_buff, 2000, 0, (struct sockaddr *)&clientaddr, &client_addr_len);
-        /// printf("num: %d\n", num);
+        // printf("num: %d\n", num);
 
         // gettimeofday( &start, NULL );
 
@@ -269,13 +265,12 @@ int main(int argc, char **argv) {
 
         // break;
     }
-    //*/
     /*
     //手动发送
-            for(i=0;i<1000;i++)
-            {
-                    send_ofo(SEADP_MSS*(i+1), SEADP_MSS,ptr, (struct sockaddr*) &target, sockfd_snd);
-            }
+    for(i=0;i<1000;i++)
+    {
+        send_ofo(SEADP_MSS*(i+1), SEADP_MSS,ptr, (struct sockaddr*) &target, sockfd_snd);
+    }
     */
     // printf("ptr: %p\n", ptr);
 
